@@ -127,5 +127,4 @@ def test_1():
 
 if __name__ == '__main__':
     app.run(port=80)
-    # show_entries()
-    get_archives()
+    show_entries()
