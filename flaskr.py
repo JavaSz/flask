@@ -27,7 +27,7 @@ app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 # 初始化sql
 def init_db():
     with closing(connect_db()) as db:
-        with app.open_resource('C:\\Users\\Administrator\\PycharmProjects\\PythonProject\\week2\\Flask2\\schema.sql') as f:
+        with app.open_resource('schema.sql') as f:
             db.cursor().executescript(f.read().decode())
         # 提交到数据库执行
         db.commit()
