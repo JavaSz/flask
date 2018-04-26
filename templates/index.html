@@ -1,0 +1,40 @@
+{% extends "main.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <form action="{{ url_for('add_entry') }}" method=post class=add-entry>
+      <dl>
+        <dt>Title:
+        <dd><input type=text size=30 name=title>
+        <dt>Description:
+        <dd><textarea name=description rows=5 cols=40></textarea>
+        <dt>Content:
+        <dd><textarea name=content rows=5 cols=100></textarea>
+        <dt>Date:
+        <dd><input type=date size=30 name=date>
+        <dt>Author:
+        <dd><input type=text size=30 name=author>
+        <dt>Tags:
+        <dd><input type=text size=30 name=tags>
+        <dd><input type=submit value=Submit>
+      </dl>
+    </form>
+  {% endif %}
+  <div class="content-body">
+    <div class="container">
+        <div class="row">
+            <main class="col-md-8">
+                <article class="post post-1">
+                    <header class="entry-header">
+                        {% for entry in entries %}
+                          <h2 class="entry-title">{{ entry.title }}</h2>
+                          <p class="entry-date">Published:&nbsp<i class="fa fa-clock"></i><b>{{ entry.date }}</b>
+                            Author:&nbsp<b>{{ entry.author }}</b>
+                          </p>
+                            <div class="entry-content clearfix">
+                            {{ entry.description|safe }}
+                            </div>
+                        {% else %}
+                          <em>Unbelievable.  No entries here so far</em>
+                        {% endfor %}
+
+{% endblock %}

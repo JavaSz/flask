@@ -1,0 +1,270 @@
+/**
+ * Logo
+ */
+
+.logo h1 a {
+    color: #000;
+}
+
+.logo h1 a:hover {
+    text-decoration: none;
+    border-bottom: none;
+}
+
+.logo h1 {
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+}
+
+.container{
+	padding-right:15px;
+	padding-left:15px;
+	margin-right:auto;
+	margin-left:auto
+}
+
+/*头部*/
+#site-header {
+    background-color: #FFF;
+    padding: 25px 20px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.main-nav{
+	margin-top: 11px;
+	max-width: 95%;
+}
+
+.navbar-header{
+	float: left;
+}
+
+.nav{
+	padding-left: 0;
+	margin-bottom: 0;
+	list-style: none;
+}
+
+.row{
+	margin-right: -15px;
+	margin-left: -15px;
+}
+
+/**
+ * 3.2.1 - Main Nav CSS 3 Hover Effect
+ */
+
+.cl-effect-11 a {
+    padding: 10px 0;
+    color: #0972b4;
+    text-shadow: none;
+}
+
+.cl-effect-11 a::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    padding: 0 0 5px 0 !important;
+    max-width: 0;
+    border-bottom: 1px solid #000;
+    color: #000;
+    content: attr(data-hover);
+    white-space: nowrap;
+    -webkit-transition: max-width 0.5s;
+    -moz-transition: max-width 0.5s;
+    transition: max-width 0.5s;
+}
+
+.cl-effect-11 a:hover::before,
+.cl-effect-11 a:focus::before {
+    max-width: 100%;
+}
+
+/*版权信息*/
+.copyrights {
+    text-indent: -9999px;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+    overflow: hidden;
+}
+
+
+/*Content*/
+.content-body {
+    padding-bottom: 4em;
+}
+
+.post {
+    background: #fff;
+    padding: 30px 30px 0;
+}
+
+.entry-title {
+    text-align: center;
+    font-size: 1.9em;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    padding: 10px 20px 0;
+}
+
+.entry-meta {
+    text-align: center;
+    color: #DDDDDD;
+    font-size: 13px;
+    margin-bottom: 30px;
+}
+
+.entry-content {
+    font-size: 18px;
+    line-height: 1.9;
+    font-weight: 300;
+    color: #000;
+}
+
+.post-category::after,
+.post-date::after,
+.post-author::after,
+.comments-link::after {
+    content: ' ·';
+    color: #000;
+}
+
+.entry-date{
+	text-align: center;
+	font-size: 13px;
+	font-family: miranafont,"Hiragino Sans GB",STXihei,"Microsoft YaHei",SimSun,sans-serif;
+}
+
+/*footer*/
+.footer{
+	margin-top: 100px;
+	font-size: 13px;
+	text-align: center;
+	font-family: miranafont,"Hiragino Sans GB",STXihei,"Microsoft YaHei",SimSun,sans-serif;
+}
+
+/*友情链接 My logo*/
+
+.profile {
+    position: relative;
+    padding: 5px; 
+    margin-bottom: 60px;
+    text-align: center;
+
+}
+
+.profile img{
+    opacity: 1;
+    z-index: 99;
+    border-radius: 100%;
+    text-align: center;
+    z-index: 99;
+    -webkit-transform: rotate(360deg);
+    animation: rotation 3s linear infinite;
+    -moz-animation: rotation 3s linear infinite;
+    -webkit-animation: rotation 3s linear infinite;
+    -o-animation: rotation 3s linear infinite;
+
+}
+
+.profile h1{
+    font-size: 50px;
+    margin-top: 10px;
+    font-family: miranafont,"Hiragino Sans GB",STXihei,"Microsoft YaHei",SimSun,sans-serif;
+}
+
+.profile p{
+    font-size: 50px;
+    margin-top: 10px;
+    font-size: 20px;
+    font-family: miranafont,"Hiragino Sans GB",STXihei,"Microsoft YaHei",SimSun,sans-serif;
+}
+
+/*友情链接样式*/
+.item{
+     display: inline-block;
+     overflow: hidden;
+     margin-right: 5px;
+     margin-bottom: 10px;
+     width: 240px;
+     height: 210px;
+     border: 1px solid #e1e8ed;
+     border-radius: 15px;
+     background: #fff;
+     letter-spacing: 1;
+     font-size: 14px;
+     font: Microsoft YaHei;
+}
+
+.bg{
+    display: block;
+    background-position: center;
+    background-size: cover;
+}
+
+.link-bg{
+    position: relative;
+    height: 90px;
+}
+
+.link-avatar{
+    position:absolute;
+    border: 4px solid white;
+    border-radius: 100%;
+    bottom: -50px;
+
+}
+
+.link-avatar img{
+    border-radius: 100%;
+}
+
+.avatar{
+    -webkit-transform: rotate(360deg);
+    animation: rotation 3s linear infinite;
+    -moz-animation: rotation 3s linear infinite;
+    -webkit-animation: rotation 3s linear infinite;
+    -o-animation: rotation 3s linear infinite;
+}
+
+@-webkit-keyframes rotation{
+from {-webkit-transform: rotate(0deg);}
+to {-webkit-transform: rotate(360deg);}
+}
+
+.meta{
+    text-align: right;
+    padding: .9em 1em;
+}
+
+.fsite{
+    background: blue;
+    color: #fff;
+    padding: 5px 10px;
+    opacity: .5;
+}
+
+.fsite text{
+    font-weight: 500;
+}
+
+/*foot img*/
+
+.refresh{
+    width:16px;
+    /*鼠标滑过显示为一个手*/
+    cursor: pointer;
+    /*把元素的顶端与行中最高元素的顶端对齐*/
+    vertical-align: text-top;
+    /*margin-top: -1px;*/
+    /*图像旋转*/
+    transition: all ease 1s;
+    transition-property: all;
+    transition-duration: 1s;
+    transition-timing-function: ease;
+    transition-delay: initial;
+}
