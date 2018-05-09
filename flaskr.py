@@ -8,10 +8,13 @@
 import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
 from contextlib import closing
+from flaskext.markdown import Markdown
+import time
+import numpy as np
 
 
 # sql配置文件
-DATABASE = 'C:\\Users\\Administrator\\PycharmProjects\\PythonProject\\week2\\Flask2\\temp\\flaskr.db'
+DATABASE = 'E:\\flask\\temp\\flaskr.db'
 DEBUG = True
 SECRET_KEY = 'development key'
 USERNAME = 'admin'
@@ -20,6 +23,7 @@ PASSWORD = 'admin'
 
 # 创建应用
 app = Flask(__name__)
+Markdown(app)
 app.config.from_object(__name__)
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
@@ -27,7 +31,7 @@ app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 # 初始化sql
 def init_db():
     with closing(connect_db()) as db:
-        with app.open_resource('schema.sql') as f:
+        with app.open_resource('E:\\flask\\schema.sql') as f:
             db.cursor().executescript(f.read().decode())
         # 提交到数据库执行
         db.commit()
@@ -38,17 +42,43 @@ def connect_db():
     return sqlite3.connect(app.config['DATABASE'])
 
 
+# 关闭数据库
+def closedb(db, cursor):
+    db.close()
+    cursor.close()
+
+
 # 定义全局变量g.db
 @app.before_request
 def before_request():
     g.db = connect_db()
 
 
-@app.route('/post/<int:id>')
-def get_post(id):
-    cur = g.db.execute('select content from entries where id = id')
-    entries = [dict(id=row[0]) for row in cur.fetchall()]
-    return render_template('archive.html', entries=entries)
+@app.route('/test')
+def test_1():
+    mkd = '''
+    # header
+    ## header2
+    [picture](http://www.example.com)
+    * 1
+    * 2
+    * 3
+    **bold**
+    '''
+
+    return render_template('test_1.html', mkd=mkd)
+
+
+@app.route('/post/<post_id>')
+def get_post(post_id):
+    # cur = g.db
+    # cursor = g.db.cursor()
+    cur = g.db.execute("select * from entries where id= {}".format(post_id))
+    # entries = [dict(id=row[0]) for row in cur.fetchall()]
+    item1 = cur.fetchone()
+    item = np.array(item1)
+    return render_template('archive.html', item=item)
+    # return render_template('archive.html', entries=entries)
 
 
 @app.route('/useful_links')
@@ -63,8 +93,8 @@ def show_about():
 
 @app.route('/')
 def show_entries():
-    cur = g.db.execute('select title, description, date, author from entries order by id desc')
-    entries = [dict(title=row[0], description=row[1], date=row[2], author=row[3]) for row in cur.fetchall()]
+    cur = g.db.execute('select id, title, description, date, author from entries order by id desc')
+    entries = [dict(id=row[0], title=row[1], description=row[2], date=row[3], author=row[4]) for row in cur.fetchall()]
     return render_template('index.html', entries=entries)
 
 
@@ -109,22 +139,8 @@ def logout():
     return redirect(url_for('show_entries'))
 
 
-# Markdown
-@app.route('/test1')
-def test_1():
-    mkd = '''
-    # header
-    ## header2
-    [picture](http://www.example.com)
-    * 1
-    * 2
-    * 3
-    **bold**
-    '''
-
-    return render_template('test1.html', mkd=mkd)
-
-
 if __name__ == '__main__':
     app.run(port=80)
     show_entries()
+    # get_post()
+
