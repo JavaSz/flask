@@ -1,10 +1,10 @@
 drop table if exists entries;
 create table entries (
-  id integer primary key autoincrement,
-  title string not null,
-  description string not null,
-  content string not null,
+  id integer primary key AUTO_INCREMENT,
+  title TEXT NOT NULL,
+  description TEXT NOT NULL,
+  content TEXT NOT NULL,
   date DATE not null ,
-  author string not null,
-  tags string not null
+  author TEXT NOT NULL,
+  tags TEXT NOT NULL
 );
