@@ -1,8 +1,22 @@
 {% extends "main.html" %}
 {% block body %}
-## 测试
-
-                                <p> {{ item[3] }}</p>
+<div>
+<main class="col-md-8">
+	<article class="post">
+		<header class="entry-header">
+            <h1 class="entry-title">{{ item[1] }}</h1>
+            <div class="entry-meta">
+                <span class="post-category">
+                    <a href="/category/1/">{{ item[1] }}</a></span>
+                <span class="post-date"><a href="#"><time class="entry-date">{{ item[4] }}</time></a></span>
+                <span class="post-author"><a href="#">{{ item[5] }}</a></span>
+                <span class="views-count"><a href="#">10054 阅读</a></span>
+            </div>
+        </header>
+        <div class="entry-content clearfix">
+		{#jinja safe 过滤器 实现文本->html#}
+		    {{ item[3] | safe }}
+		</div>
 
 <!-- Disqus -->
 <div id="disqus_thread"></div>
@@ -25,5 +39,6 @@ s.setAttribute('data-timestamp', +new Date());
 })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
+</main>
+</div>
 {% endblock %}

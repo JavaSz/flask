@@ -1,4 +1,5 @@
-<!doctype html>
+<!DOCTYPE html>
+<html>
 <head>
  <title>SyNr &amp; CodeCool</title>
 
@@ -9,48 +10,63 @@
     <!-- css -->
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <!-- jquery -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <!-- fontawesome -->
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
     <!-- js -->
+    <script src="/static/ckeditor/ckeditor.js"></script>
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 </head>
-<div class="container">
-    <header id="site-header">
-        <div class="row">
-            <div class="col-md-4 col-sm-5 col-xs-8">
-                <div class="logo">
-                    <h1><a href="{{ url_for('show_entries') }}"><b>SyNr</b> &amp; CodeCool</a></h1>
-                </div>
-            </div><!-- col-md-4 -->
-                <div class="col-md-8 col-sm-7 col-xs-4">
-                    <nav class="main-nav" role="navigation">
-                        <div class="navbar-header">
-                            <button type="button" id="trigger-overlay" class="navbar-toggle">
-                                <span class="ion-navicon"></span>
-                            </button>
+<body>
+    <div class="container">
+        <header id="site-header">
+            <div class="row">
+                <div class="col-md-4 col-sm-5 col-xs-8">
+                    <div class="logo">
+                        <h1><a href="{{ url_for('show_entries') }}"><b>SyNr</b> &amp; CodeCool</a></h1>
+                    </div>
+                </div><!-- col-md-4 -->
+                    <div class="col-md-8 col-sm-7 col-xs-4">
+                        <nav class="main-nav" role="navigation">
+                            <div class="navbar-header">
+                                <button type="button" id="trigger-overlay" class="navbar-toggle">
+                                    <span class="ion-navicon"></span>
+                                </button>
+                            </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                            <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}">Archive</a></li>
+                            <li class="cl-effect-11"><a href="{{ url_for('show_friends') }}">Useful Links</a></li>
+                            <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}">About</a></li>
+                            <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}">Contact</a></li>
+                                  <!--判断是否登录-->
+                              {% if not session.logged_in %}
+                                <li class="cl-effect-11"><a href="{{ url_for('login') }}">Login</a></li>
+                              {% else %}
+                                <li class="cl-effect-11"><a href="{{ url_for('logout') }}">Logout</a></li>
+                                  <li class="cl-effect-11"><a href="{{ url_for('admin') }}">Backstage Management</a></li>
+                              {% endif %}
+                          </ul>
                         </div>
 
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav navbar-right">
-                        <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}">Archive</a></li>
-                        <li class="cl-effect-11"><a href="{{ url_for('show_friends') }}">Useful Links</a></li>
-                        <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}">About</a></li>
-                        <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}">Contact</a></li>
-                              <!--判断是否登录-->
-                          {% if not session.logged_in %}
-                            <li class="cl-effect-11"><a href="{{ url_for('login') }}">Login</a></li>
-                          {% else %}
-                            <li class="cl-effect-11"><a href="{{ url_for('logout') }}">Logout</a></li>
-                          {% endif %}
-                      </ul>
-                    </div>
+                </div>
+               
+                
+        </header>
+     {% block body %}{% endblock %}
+    </div>
+    <div class="footer">
+    <!-- 版权信息 -->
+    <p>© Copyright 2018&nbsp<i class="fa fa-heart" aria-hidden="true"></i>&nbsp SyNr</p>
+    </div>
 
-            </div>
-           
-            
-    </header>
- {% block body %}{% endblock %}
-</div>
-<div class="footer">
-<!-- 版权信息 -->
-<p>© Copyright 2018&nbsp<i class="fa fa-heart" aria-hidden="true"></i>&nbsp SyNr</p>
-</div>
+<script type="text/javascript">
+  $(function() {
+    $( "#datepicker" ).datepicker();
+  });
+</script>
+</body>
+</html>

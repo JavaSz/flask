@@ -367,3 +367,31 @@ input[type="submit"]:hover{
     color:#e8e8e8;
 }
 
+
+/*新建文章*/
+.content-write{
+    margin: 10px 20px 0 2px;
+}
+
+h1.wp-heading-inline {
+    margin-bottom: .5em;
+}
+
+.wp-header-end {
+    margin: -2px 0 0;
+}
+
+/*简介*/
+.description-sidebar{
+    float: right;
+    margin-right: 100px;
+    margin-top: 5px;
+    width: 280px;
+
+}
+
+/*文章详情页面*/
+.article.post{
+    background: #fff;
+    padding: 30px 30px 0;
+}

@@ -14,10 +14,9 @@ import pymysql
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hard to guess'
 app.config['USERNAME'] = 'admin'
-app.config['PASSWORD'] = 'admin'
-app.config['DEBUG'] = 'True'
-# app.config.from_object(__name__)
-# app.config.from_envvar('FLASKR_SETTINGS', silent=True)
+app.config['PASSWORD'] = '12345'
+app.config.from_object(__name__)
+app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
 
 # connect database
@@ -33,25 +32,11 @@ g = db.cursor()
 # 关闭数据库
 
 
-# 定义全局变量g.db
-# @app.before_request
-# def before_request():
-#     g.db = db
-
-
-@app.route('/test')
-def test_1():
-    mkd = '''
-    # header
-    ## header2
-    [picture](http://www.example.com)
-    * 1
-    * 2
-    * 3
-    **bold**
-    '''
-
-    return render_template('test_1.html', mkd=mkd)
+@app.route('/admin')
+def admin():
+    if not session.get('logged_in'):
+        return render_template('login.html')
+    return render_template('editor.html')
 
 
 @app.route('/post/<post_id>')
@@ -61,8 +46,11 @@ def get_post(post_id):
     # entries = [dict(id=row[0]) for row in cur.fetchall()]
     item1 = cur.fetchone()
     item = np.array(item1)
-    return render_template('archive.html', item=item)
-    # return render_template('archive.html', entries=entries)
+    # 文章是否存在
+    if np.any(item):
+        return render_template('archive.html', item=item)
+    else:
+        return render_template('404.html')
 
 
 @app.route('/useful_links')
@@ -82,6 +70,13 @@ def show_entries():
     entries = [dict(id=row[0], title=row[1], description=row[2], date=row[3], author=row[4]) for row in cur.fetchall()]
     return render_template('index.html', entries=entries)
 
+
+def show_tags():
+    cur = g
+    g.execute('select tags from entries')
+    for row in cur.fetchall():
+        print(row)
+    return row
 
 # 1. g对象是专门用来保存用户的数据的。
 # 2. g对象在一次请求中的所有的代码的地方，都是可以使用的
@@ -126,6 +121,5 @@ def logout():
 
 if __name__ == '__main__':
     app.run(port=23333)
-    show_entries()
     # get_post()
 
