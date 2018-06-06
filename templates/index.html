@@ -4,18 +4,21 @@
     <div class="container">
         <div class="row">
             <main class="col-md-8">
-                <article class="post post-1">
+                <article class="post">
                     <header class="entry-header">
                         {% for entry in entries %}
                         <!-- 绑定文章详情 -->
                           <a href="{{ url_for('get_post', post_id=entry.id) }}">
-                            <h2 class="entry-title">{{ entry.title}}</h2>
+                            <h1 class="entry-title">{{ entry.title}}</h1>
                           </a>
                           <p class="entry-date">Published:&nbsp<i class="fa fa-clock"></i><b>{{ entry.date }}</b>
                             Author:&nbsp<b>{{ entry.author }}</b>
                           </p>
                             <div class="entry-content clearfix">
                             {{ entry.description|safe }}
+                              <div class="read-more cl-effect-14">
+                                  <a href="{{ url_for('get_post', post_id=entry.id) }}" class="more-link">Read More&nbsp<span class="meta-nav">→</span></a>
+                              </div>
                             </div>
                         {% else %}
                           <em>Unbelievable.  No entries here so far</em>

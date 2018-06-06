@@ -38,15 +38,15 @@
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
-                            <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}">Archive</a></li>
-                            <li class="cl-effect-11"><a href="{{ url_for('show_friends') }}">Useful Links</a></li>
-                            <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}">About</a></li>
-                            <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}">Contact</a></li>
+                            <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}"data-hover="Archive">Archive</a></li>
+                            <li class="cl-effect-11"><a href="{{ url_for('show_friends') }}"data-hover="Useful Links">Useful Links</a></li>
+                            <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}"data-hover="About">About</a></li>
+                            <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}"data-hover="Contact">Contact</a></li>
                                   <!--判断是否登录-->
                               {% if not session.logged_in %}
-                                <li class="cl-effect-11"><a href="{{ url_for('login') }}">Login</a></li>
+                                <li class="cl-effect-11"><a href="{{ url_for('login') }}"data-hover="Login">Login</a></li>
                               {% else %}
-                                <li class="cl-effect-11"><a href="{{ url_for('logout') }}">Logout</a></li>
+                                <li class="cl-effect-11"><a href="{{ url_for('logout') }}"data-hover="Logout">Logout</a></li>
                                   <li class="cl-effect-11"><a href="{{ url_for('admin') }}">Backstage Management</a></li>
                               {% endif %}
                           </ul>
