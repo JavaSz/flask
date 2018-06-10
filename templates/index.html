@@ -3,6 +3,7 @@
   <div class="content-body">
     <div class="container">
         <div class="row">
+          <!-- 文章 -->
             <main class="col-md-8">
                 <article class="post">
                     <header class="entry-header">
@@ -21,11 +22,24 @@
                               </div>
                             </div>
                         {% else %}
-                          <em>Unbelievable.  No entries here so far</em>
+                          <em>Unbelievable.  No entries here so far!</em>
                         {% endfor %}
                     </header>
                 </article>
             </main>
+            <!-- 侧边栏 -->
+            <aside class="col-md-4">
+              <div class="widget widget-recent-posts">
+                <h3 class="widget-title">最新文章</h3>
+                <ul>
+                  {% for posts in posts %}
+                  <li><a href="{{ url_for('get_post', post_id=posts.id) }}" class="more-link">{{ posts.title }}</a></li>
+                  {% else %}
+                  Unbelievable.  No entries here so far！
+                  {% endfor %}
+                </ul>
+              </div>
+            </aside>
         </div>
     </div>
   </div>

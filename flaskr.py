@@ -32,6 +32,14 @@ g = db.cursor()
 # 关闭数据库
 
 
+# @app.after_request
+# def get_recent_posts():
+#     cur = g
+#     g.execute('select * from entries order by date desc LIMIT 0,2')
+#     posts = [dict(id=row[0], title=row[1], description=row[2], date=row[3], author=row[4]) for row in cur.fetchall()]
+#     return render_template('index.html', posts=posts)
+
+
 @app.route('/admin')
 def admin():
     if not session.get('logged_in'):
@@ -65,18 +73,14 @@ def show_about():
 
 @app.route('/')
 def show_entries():
+    # get_recent_posts()
     cur = g
     g.execute('select id, title, description, date, author from entries order by id desc')
     entries = [dict(id=row[0], title=row[1], description=row[2], date=row[3], author=row[4]) for row in cur.fetchall()]
-    return render_template('index.html', entries=entries)
+    g.execute('select * from entries order by date desc LIMIT 0,2')
+    posts = [dict(id=row[0], title=row[1], description=row[2], date=row[3], author=row[4]) for row in cur.fetchall()]
+    return render_template('index.html', entries=entries, posts=posts)
 
-
-def show_tags():
-    cur = g
-    g.execute('select tags from entries')
-    for row in cur.fetchall():
-        print(row)
-    return row
 
 # 1. g对象是专门用来保存用户的数据的。
 # 2. g对象在一次请求中的所有的代码的地方，都是可以使用的
@@ -121,5 +125,4 @@ def logout():
 
 if __name__ == '__main__':
     app.run(port=23333)
-    # get_post()
 
