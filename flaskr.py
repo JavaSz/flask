@@ -116,6 +116,22 @@ def login():
     return render_template('login.html', error=error)
 
 
+@app.route('/admin/edit')
+def show_edit():
+    error = None
+    if request.method == 'POST':
+        if request.form['username'] != app.config['USERNAME']:
+            error = 'Invalid username'
+        elif request.form['password'] != app.config['PASSWORD']:
+            error = 'Invalid password'
+        else:
+            session['logged_in'] = True
+            flash('You were logged in')
+            render_template('editor.html')
+    return render_template('login.html', error=error)
+
+
+
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
