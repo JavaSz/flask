@@ -29,11 +29,23 @@
             </main>
             <!-- 侧边栏 -->
             <aside class="col-md-4">
+              <!-- 最新的两篇文章 -->
               <div class="widget widget-recent-posts">
                 <h3 class="widget-title">最新文章</h3>
                 <ul>
                   {% for posts in posts %}
                   <li><a href="{{ url_for('get_post', post_id=posts.id) }}" class="more-link">{{ posts.title }}</a></li>
+                  {% else %}
+                  Unbelievable.  No entries here so far！
+                  {% endfor %}
+                </ul>
+              </div>
+              <!-- 分类 -->
+              <div class="widget widget-tag-cloud">
+                <h3 class="widget-title">标签云</h3>
+                <ul>
+                  {% for entry in entries %}
+                  <li><a href="{{ url_for('get_post', post_id=entry.id) }}" class="more-link">{{ entry.tags }}</a></li>
                   {% else %}
                   Unbelievable.  No entries here so far！
                   {% endfor %}
