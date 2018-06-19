@@ -7,12 +7,12 @@
             <main class="col-md-8">
                 <article class="post">
                     <header class="entry-header">
-                        {% for entry in entries %}
+                        {% for entry in archive %}
                         <!-- 绑定文章详情 -->
                           <a href="{{ url_for('get_post', post_id=entry.id) }}">
                             <h1 class="entry-title">{{ entry.title}}</h1>
                           </a>
-                          <p class="entry-date">Published:&nbsp<a href="/archives/{{ entry.date}}"><i class="fa fa-clock"></i><b>{{ entry.date }}</b></a>
+                          <p class="entry-date">Published:&nbsp<i class="fa fa-clock"></i><b>{{ entry.date }}</b>
                             Author:&nbsp<b>{{ entry.author }}</b>
                           </p>
                             <div class="entry-content clearfix">

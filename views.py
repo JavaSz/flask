@@ -31,6 +31,10 @@ g = db.cursor()
 # 关闭数据库
 
 
+@app.errorhandler(404)
+def page_not_found():
+    return render_template('404.html'), 404
+
 
 @app.route('/admin')
 def admin():
@@ -51,6 +55,19 @@ def get_post(post_id):
         return render_template('archive.html', item=item)
     else:
         return render_template('404.html')
+
+
+# @app.route('/archives/<date>')
+# def time_get_post(date):
+#     cur = g
+#     g.execute("select * from entries where date= {}".format(date))
+#     archives = cur.fetchall()
+#     archive = np.array(archives)
+#     # 文章是否存在
+#     if np.any(archive):
+#         return render_template('index.html', archive=archive)
+#     else:
+#         return render_template('404.html')
 
 
 @app.route('/useful_links')

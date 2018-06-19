@@ -16,6 +16,7 @@
     <!-- fontawesome -->
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
     <!-- js -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
     <script src="/static/ckeditor/ckeditor.js"></script>
     <script src="//code.jquery.com/jquery-1.9.1.js"></script>
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
@@ -39,21 +40,32 @@
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
-                            <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}"data-hover="Archive">Archive</a></li>
-                            <li class="cl-effect-11"><a href="{{ url_for('show_friends') }}"data-hover="Useful Links">Useful Links</a></li>
-                            <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}"data-hover="About">About</a></li>
-                            <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}"data-hover="Contact">Contact</a></li>
+                            <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}"data-hover="首页">首页</a></li>
+                            <li class="cl-effect-11"><a href="{{ url_for('show_friends') }}"data-hover="友链">友链</a></li>
+                            <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}"data-hover="关于">关于</a></li>
+                            <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}"data-hover="联系">联系</a></li>
                                   <!--判断是否登录-->
                               {% if not session.logged_in %}
-                                <li class="cl-effect-11"><a href="{{ url_for('login') }}"data-hover="Login">Login</a></li>
+                                <li class="cl-effect-11"><a href="{{ url_for('login') }}"data-hover="登录">登录</a></li>
                               {% else %}
-                                <li class="cl-effect-11"><a href="{{ url_for('logout') }}"data-hover="Logout">Logout</a></li>
+                                <li class="cl-effect-11"><a href="{{ url_for('logout') }}"data-hover="登出">登出</a></li>
                                   <li class="cl-effect-11"><a href="{{ url_for('admin') }}">Backstage Management</a></li>
                               {% endif %}
                           </ul>
                         </div>
-
+<!-- 
+                <div id="header-search-box">
+                    <a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>
+                    <div id="search-form" class="search-form">
+                        <form role="search" method="get" id="searchform" action="#">
+                            <input type="search" name="q" placeholder="搜索" required>
+                            <button type="submit"><span class="ion-ios-search-strong"></span></button>
+                        </form>
+                    </div>
                 </div>
+            </div> col-md-8 --> 
+
+        </div>
                
                 
         </header>
@@ -68,6 +80,48 @@
   $(function() {
     $( "#datepicker" ).datepicker();
   });
+</script>
+<!-- /* 鼠标特效 */ -->
+<script type="text/javascript">
+
+    var a_idx = 0;
+    jQuery(document).ready(function($) {
+        $("body").click(function(e) {
+            var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正" ,"法治", "爱国", "敬业", "诚信", "友善");
+            // set text in <span/> 遍历 array
+            var $i = $("<span/>").text(a[a_idx]);
+            a_idx = (a_idx + 1) % a.length;
+            // jquery 用于判断鼠标位置
+            var x = e.pageX,
+                y = e.pageY;
+
+            $i.css({
+                "z-index": 99999999999999999999999999999999999999999999999999999999999999999999999999 ,
+                // 起始 距上边距 y轴
+                "top": y - 20 ,
+                // 左边距不变换
+                "left": x,
+                "position": "absolute",
+                // 线条粗细
+                "font-weight": "light",
+                // "color": "#ff6651"
+                // 浮动文字颜色
+                "color":"#ed0345"
+            });
+            $("body").append($i);
+            $i.animate({
+                    // 终点
+                    "top": y - 180,
+                    // 完全透明
+                    "opacity": 0
+                },
+                1500,
+                function() {
+                    // 移除文字
+                    $i.remove();
+                });
+        });
+    });
 </script>
 </body>
 </html>
