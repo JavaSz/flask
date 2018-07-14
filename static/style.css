@@ -1,3 +1,45 @@
+/*register */
+.register-button {
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 8px 0;
+    /*所有 4 个外边距都是 16px*/
+    margin: 16px;
+    box-sizing: border-box;
+    border: 1px solid #d6d9dc;
+    text-align: center;
+    background: #FFF;
+    color: #535a60;
+}
+/*twiter login*/
+.register-button.twiter-login {
+    color: #FFF;
+    background-color: #1da1f2;
+    border-color: transparent;
+}
+/*Or Register*/
+.or-container {
+    text-align: center;
+    margin: 0;
+    margin-bottom: 10px;
+    clear: both;
+    color: #6a737c;
+    font-variant: small-caps;
+}
+ .or-hr {
+    margin-bottom: 0;
+    position: relative;
+    top: 19px;
+    height: 0;
+    border: 0;
+    border-top: 1px solid #FFF;
+}
+#or {
+    display: inline-block;
+    position: relative;
+    padding: 10px;
+    background-color: #eeeeee;
+}
 /*全文检索*/
 #header-search-box {
     position: absolute;
@@ -482,7 +524,7 @@ to {-webkit-transform: rotate(360deg);}
     color:#676767;
     font-family: 'Open Sans', sans-serif;
     font-weight:400;
-    padding-top: 19%;
+    padding-top: 25%;
     text-align: center;
 }
 .login-main form {
