@@ -11,6 +11,7 @@ from wtforms.validators import DataRequired
 
 # User login form
 class LoginForm(FlaskForm):
+    # 它会要求用户输入username和password，并提供一个“remember me”的复选框和提交按钮
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')

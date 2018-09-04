@@ -115,17 +115,24 @@ def add_entry():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
-    # if request.method == 'POST':
-    #     if request.form['username'] != app.config['USERNAME']:
-    #         error = 'Invalid username'
-    #     elif request.form['password'] != app.config['PASSWORD']:
-    #         error = 'Invalid password'
-    #     else:
-    #         session['logged_in'] = True
-    #         flash('You were logged in')
-    #         return redirect(url_for('show_entries'))
-    form = LoginForm()
-    return render_template('1.html', error=error, title='Sign In', form=form)
+    if request.method == 'POST':
+        if request.form['username'] != app.config['USERNAME']:
+            error = 'Invalid username'
+        elif request.form['password'] != app.config['PASSWORD']:
+            error = 'Invalid password'
+        else:
+            session['logged_in'] = True
+            flash('You were logged in')
+            return redirect(url_for('show_entries'))
+    # form = LoginForm()
+    # # form.validate_on_submit()实例方法会执行form校验的工作
+    # if form.validate_on_submit():
+    #     flash('Login requested for user {}, remember_me={}'.format(
+    #         form.username.data, form.remember_me.data))
+    #     return redirect('/')
+    return render_template('login.html', error=error)
+
+
 @app.route('/admin/edit')
 def show_edit():
     error = None

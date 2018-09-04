@@ -6,7 +6,6 @@
 # @Blog    ：https://codedraw.cn
 # 导入所有的模块
 import views
-import Restful_api
 
 
 if __name__ == '__main__':
