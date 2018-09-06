@@ -7,8 +7,6 @@
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
 import numpy as np
 import pymysql
-from forms import LoginForm
-
 
 # 创建应用
 # ... add more variables here as needed
