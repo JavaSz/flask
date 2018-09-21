@@ -5,6 +5,7 @@
 # @Software: PyCharm
 # @Blog    ：https://codedraw.cn
 from app import app
+from app import routes
 
 
 def hello():

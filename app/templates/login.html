@@ -1,0 +1,86 @@
+{#{% extends "base.html" %}#}
+{##}
+{#{% block content %}#}
+{#    <h1>Sign In</h1>#}
+{#    <form action="" method="post" novalidate>#}
+{#        {{ form.hidden_tag() }}#}
+{#        <p>#}
+{#            {{ form.username.label }}<br>#}
+{#            {{ form.username(size=32) }}<br>#}
+{#            {% for error in form.username.errors %}#}
+{#            <span style="color: red;">[{{ error }}]</span>#}
+{#            {% endfor %}#}
+{#        </p>#}
+{#        <p>#}
+{#            {{ form.password.label }}<br>#}
+{#            {{ form.password(size=32) }}<br>#}
+{#            {% for error in form.password.errors %}#}
+{#            <span style="color: red;">[{{ error }}]</span>#}
+{#            {% endfor %}#}
+{#        </p>#}
+{#        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>#}
+{#        <p>{{ form.submit() }}</p>#}
+{#    </form>#}
+{#{% endblock %}#}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>后台管理</title>
+    <meta charset="utf-8">
+    <!-- css -->
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!--webfonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,300,600,700' rel='stylesheet' type='text/css'>
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+</head>
+<div class="login-main">
+  <div class="login-form">
+    <h1>Admin Login</h1>
+          <div class="login-head">
+            <img src="static/images/user.jpg" alt=""/>
+          </div>
+    {% if error %}<p class="error"><strong>Error:</strong> {{ error }}{% endif %}
+{#    <form action="{{ url_for('login') }}" method=post>#}
+{##}
+{#        <!-- onfocus 后执行的js语句 -->#}
+{#        <input type=text name=username value="username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'username';}">#}
+{#        <input type=password name=password value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}">#}
+{#        <input type=submit value=Login>#}
+{#    </form>#}
+{#    <h1>Sign In</h1>#}
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul style="text-align: center; list-style: none">
+
+            {% for message in messages %}
+            <li><p style="color:red">{{ message }}</p></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.username.label }}<br>
+            {{ form.username(size=32) }}<br>
+            {% for error in form.username.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}<br>
+            {% for error in form.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+        <p>{{ form.submit() }}</p>
+
+    </form>
+  <p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
+  </div>
+</div>

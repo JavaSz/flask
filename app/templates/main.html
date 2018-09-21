@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>SyNr &amp; CodeCool</title>
+
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- css -->
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <!-- jquery -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <!-- fontawesome -->
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+    <!-- js -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="/static/ckeditor/ckeditor.js"></script>
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header id="site-header">
+            <div class="row">
+                <div class="col-md-4 col-sm-5 col-xs-8">
+                    <div class="logo">
+                        <h1><a href="{{ url_for('show_entries') }}"><b>SyNr</b> &amp; CodeCool</a></h1>
+                    </div>
+                </div><!-- col-md-4 -->
+                    <div class="col-md-8 col-sm-7 col-xs-4">
+                        <nav class="main-nav" role="navigation">
+                            <div class="navbar-header">
+                                <button type="button" id="trigger-overlay" class="navbar-toggle">
+                                    <span class="ion-navicon"></span>
+                                </button>
+                            </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                            <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}"data-hover="首页">首页</a></li>
+                            <li class="cl-effect-11"><a href="{{ url_for('show_friends') }}"data-hover="友链">友链</a></li>
+                            <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}"data-hover="关于">关于</a></li>
+                            <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}"data-hover="联系">联系</a></li>
+                                  <!--判断是否登录-->
+                              {% if not session.logged_in %}
+                                <li class="cl-effect-11"><a href="{{ url_for('login') }}"data-hover="登录">登录</a></li>
+                              {% else %}
+                                <li class="cl-effect-11"><a href="{{ url_for('logout') }}"data-hover="登出">登出</a></li>
+                                  <li class="cl-effect-11"><a href="{{ url_for('admin') }}"data-hover="Management">Management</a></li>
+                              {% endif %}
+                          </ul>
+                        </div>
+<!-- 
+                <div id="header-search-box">
+                    <a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>
+                    <div id="search-form" class="search-form">
+                        <form role="search" method="get" id="searchform" action="#">
+                            <input type="search" name="q" placeholder="搜索" required>
+                            <button type="submit"><span class="ion-ios-search-strong"></span></button>
+                        </form>
+                    </div>
+                </div>
+            </div> col-md-8 --> 
+
+        </div>
+</div>               
+</header>
+     {% block body %}{% endblock %}
+    
+    <div class="footer">
+    <!-- 版权信息 -->
+    <p>© Copyright 2018&nbsp<i class="fa fa-heart" aria-hidden="true"></i>&nbsp SyNr</p>
+    </div>
+
+<script type="text/javascript">
+  $(function() {
+    $( "#datepicker" ).datepicker();
+  });
+</script>
+<!-- /* 鼠标特效 */ -->
+<script type="text/javascript">
+
+    var a_idx = 0;
+    jQuery(document).ready(function($) {
+        $("body").click(function(e) {
+            var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正" ,"法治", "爱国", "敬业", "诚信", "友善");
+            // set text in <span/> 遍历 array
+            var $i = $("<span/>").text(a[a_idx]);
+            a_idx = (a_idx + 1) % a.length;
+            // jquery 用于判断鼠标位置
+            var x = e.pageX,
+                y = e.pageY;
+
+            $i.css({
+                // 浮于任何元素之上
+                "z-index": 9999999999999999999999999999999999999999999999999999999999999999999999999 ,
+                // 起始 距上边距 y轴
+                "top": y - 20 ,
+                // 左边距不变换
+                "left": x,
+                "position": "absolute",
+                // 线条粗细
+                "font-weight": "light",
+                // "color": "#ff6651"
+                // 浮动文字颜色
+                "color":"#ed0345"
+            });
+            $("body").append($i);
+            $i.animate({
+                    // 终点
+                    "top": y - 180,
+                    // 完全透明
+                    "opacity": 0
+                },
+                1500,
+                function() {
+                    // 移除文字
+                    $i.remove();
+                });
+        });
+    });
+
+// 日历
+var month_leap_year = [31,29,31,30,31,30,31,31,30,31,30,31]; //闰年
+var month_non_leap_year = [31,28,31,30,31,30,31,31,30,31,30,31]; //非闰年
+var month_name = ["January","Febrary","March","April","May","June","July","Auguest","September","October","November","December"];
+var holder = document.getElementById("days");
+var prev = document.getElementById("prev");
+var next = document.getElementById("next");
+var ctitle = document.getElementById("calendar-title");
+var cyear = document.getElementById("calendar-year");
+var my_date = new Date(); // http://www.w3school.com.cn/js/jsref_obj_date.asp ( js date Object
+var my_year = my_date.getFullYear(); // Return the year from a Date object in four digits
+var my_month = my_date.getMonth(); // Return month from Date object (0 ~ 11)
+var my_day = my_date.getDate();  // Returns a day of the month from the Date object (1 ~ 31)
+// 
+prev.onclick = function(e){
+    e.preventDefault();
+    my_month--;
+    if(my_month<0){
+        my_year--;
+        my_month = 11;
+    }
+    refreshDate();
+}
+next.onclick = function(e){
+    e.preventDefault();
+    my_month++;
+    if(my_month>11){
+        my_year++;
+        my_month = 0;
+    }
+    refreshDate();
+}
+function refreshDate(){
+    var str = "";
+    var totalDay = daysMonth(my_month, my_year); //获取该月总天数
+    var firstDay = dayStart(my_month, my_year); //获取该月第一天是星期几
+    var myclass;
+    for(var i=1; i<firstDay; i++){ 
+        str += "<li></li>"; //为起始日之前的日期创建空白节点
+    }
+    // &&运算符首先返回NaN、null、undefined、0、false
+    // ||运算符首先返回非NaN、null、undefined、0、false
+    for(var i=1; i<=totalDay; i++){
+        if((i<my_day && my_year==my_date.getFullYear() && my_month==my_date.getMonth()) || my_year<my_date.getFullYear() || ( my_year==my_date.getFullYear() && my_month<my_date.getMonth())){ 
+            myclass = " class='lightgrey'"; //当该日期在今天之前时，以浅灰色字体显示
+        }else if (i==my_day && my_year==my_date.getFullYear() && my_month==my_date.getMonth()){
+            myclass = " class='green greenbox'"; //当该日期是当天时，以绿色背景突出显示
+        }else{
+            myclass = " class='darkgrey'"; //当该日期在今后之后时，以深灰字体显示
+        }
+        str += "<li"+myclass+">"+i+"</li>"; //创建日期节点
+    }
+    holder.innerHTML = str; //设置日期显示
+    ctitle.innerHTML = month_name[my_month]; //设置英文月份显示
+    cyear.innerHTML = my_year; //设置年份显示
+}
+//获取某年某月第一天是星期几
+function dayStart(month, year) {
+    var tmpDate = new Date(year, month, 1);
+    return (tmpDate.getDay());
+}
+
+//计算某年是不是闰年，通过求年份除以4的余数即可
+function daysMonth(month, year) {
+    var tmp = year % 4;
+    if (tmp == 0) {
+        return (month_leap_year[month]);
+    } else {
+        return (month_non_leap_year[month]);
+    }
+}
+refreshDate();
+
+</script>
+</body>
+</html>
