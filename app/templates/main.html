@@ -45,7 +45,7 @@
                             <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}"data-hover="关于">关于</a></li>
                             <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}"data-hover="联系">联系</a></li>
                                   <!--判断是否登录-->
-                              {% if not session.logged_in %}
+                              {% if current_user.is_anonymous %}
                                 <li class="cl-effect-11"><a href="{{ url_for('login') }}"data-hover="登录">登录</a></li>
                               {% else %}
                                 <li class="cl-effect-11"><a href="{{ url_for('logout') }}"data-hover="登出">登出</a></li>

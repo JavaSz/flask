@@ -737,3 +737,12 @@ h1.wp-heading-inline {
     font-family: 'Open Sans', sans-serif;
     text-align:center;
 }
+
+
+/*disqus 评论上边距*/
+#disqus_head{
+    background-color: #FFF;
+    padding: 25px 20px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #e7e7e7;
+}

@@ -28,10 +28,22 @@ g = data.cursor()
 
 
 @app.route('/')
+def show_entries():
+    # get_recent_posts()
+    cur = g
+    g.execute('select id, title, description, timestamp, user_id, tags from post order by id desc')
+    entries = [dict(id=row[0], title=row[1], description=row[2], date=row[3], author=row[4], tags=row[5]) for row in cur.fetchall()]
+    # 获取作者名称
+    # g.execute('select id, title, description, timestamp, user_id, tags from post order by id desc')
+    g.execute('select id, title, description, timestamp, user_id, tags from post order by timestamp desc LIMIT 0,2')
+    posts = [dict(id=row[0], title=row[1], description=row[2], date=row[3], author=row[4]) for row in cur.fetchall()]
+    return render_template('index.html', entries=entries, posts=posts)
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('show_entries'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -41,7 +53,7 @@ def login():
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('index')
+            next_page = url_for('show_entries')
         return redirect(next_page)
         # return redirect(url_for('index'))
     return render_template('login.html', title='Sign In', form=form)
@@ -50,24 +62,24 @@ def login():
 @app.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('show_entries'))
 
 
 @app.route('/index')
-def show_entries():
-    # get_recent_posts()
-    cur = g
-    g.execute('select id, title, description, timestamp, user_id, tags from post order by id desc')
-    entries = [dict(id=row[0], title=row[1], description=row[2], date=row[3], author=row[4], tags=row[5]) for row in cur.fetchall()]
-    g.execute('select id, title, description, timestamp, user_id, tags from post order by timestamp desc LIMIT 0,2')
-    posts = [dict(id=row[0], title=row[1], description=row[2], date=row[3], author=row[4]) for row in cur.fetchall()]
-    return render_template('index.html', entries=entries, posts=posts)
+# def show_entries():
+#     # get_recent_posts()
+#     cur = g
+#     g.execute('select id, title, description, timestamp, user_id, tags from post order by id desc')
+#     entries = [dict(id=row[0], title=row[1], description=row[2], date=row[3], author=row[4], tags=row[5]) for row in cur.fetchall()]
+#     g.execute('select id, title, description, timestamp, user_id, tags from post order by timestamp desc LIMIT 0,2')
+#     posts = [dict(id=row[0], title=row[1], description=row[2], date=row[3], author=row[4]) for row in cur.fetchall()]
+#     return render_template('index.html', entries=entries, posts=posts)
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('show_entries'))
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data)
@@ -86,8 +98,9 @@ def page_not_found():
 
 @app.route('/admin')
 def admin():
-    if not session.get('logged_in'):
-        return render_template('login.html')
+    form = LoginForm()
+    if current_user.is_anonymous:
+        return render_template('login.html', form=form)
     return render_template('editor.html')
 
 
@@ -132,7 +145,7 @@ def show_about():
 # 2. g对象在一次请求中的所有的代码的地方，都是可以使用的
 @app.route('/add', methods=['POST'])
 def add_entry():
-    if not session.get('logged_in'):
+    if current_user.is_anonymous:
         abort(401)
     g.execute('insert into entries (title, description, content, date, author, tags) values (%s, %s, %s, %s, %s, %s)', [
         request.form['title'],

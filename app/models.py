@@ -6,6 +6,7 @@
 # @Blog    ：https://codedraw.cn
 from flask_login import UserMixin
 from app import db
+from app import login
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
@@ -51,3 +52,8 @@ class Post(db.Model):
 
 
 # Base.metadata.create_all(connect)  # 创建表结构
+
+
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))

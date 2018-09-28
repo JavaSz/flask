@@ -4,18 +4,18 @@
 <main class="col-md-12 col-center-block">
 	<article class="post post-{{ item[0] }}">
 		<header class="entry-header">
-            <h1 class="entry-title">{{ item[1] }}</h1>
+            <h1 class="entry-title">{{ item[0] }}</h1>
             <div class="entry-meta">
                 <span class="post-category">
-                    <a href="/category/1/">{{ item[1] }}</a></span>
-                <span class="post-date"><a href="/archive/{{ item[4] }}"><time class="entry-date">{{ item[4] }}</time></a></span>
-                <span class="post-author"><a href="#">{{ item[5] }}</a></span>
-                <span class="views-count"><a href="#">10054 阅读</a></span>
+                    <a href="/category/1/">{{ item[0] }}</a></span>
+                <span class="post-date"><a href="/archive/{{ item[0] }}"><time class="entry-date">{{ item[0] }}</time></a></span>
+                <span class="post-author"><a href="#">{{ item[0] }}</a></span>
+{#                <span class="views-count"><a href="#">10054 阅读</a></span>#}
             </div>
         </header>
         <div class="entry-content clearfix">
 		{#jinja safe 过滤器 实现文本->html#}
-		    {{ item[3] | safe }}
+		    {{ item[0] | safe }}
 		</div>
 
 <!-- Disqus -->
