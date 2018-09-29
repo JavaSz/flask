@@ -9,12 +9,13 @@ from app import app
 from app import db
 from app.forms import LoginForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
+from app.models import User, Post
 from flask import request
 from werkzeug.urls import url_parse
 from app.forms import RegistrationForm
 import pymysql
 import numpy as np
+from datetime import datetime, timezone, timedelta
 
 # connect database
 data = pymysql.connect(
@@ -38,6 +39,28 @@ def show_entries():
     g.execute('select id, title, description, timestamp, user_id, tags from post order by timestamp desc LIMIT 0,2')
     posts = [dict(id=row[0], title=row[1], description=row[2], date=row[3], author=row[4]) for row in cur.fetchall()]
     return render_template('index.html', entries=entries, posts=posts)
+
+
+@app.route('/user/<userid>')
+def user(userid):
+    # user_id = Post.query.filter_by(user_id=userid).first_or_404()
+    user = User.query.filter_by(id=userid).first_or_404()
+    posts = [
+        {'author': user, 'body': 'Test post #1'},
+        {'author': user, 'body': 'Test post #2'}
+    ]
+    return render_template('user.html', user=user)
+
+
+@app.before_request
+def before_request():
+    if current_user.is_authenticated:
+        #  强制设置时区为UTC+0:00
+        utc_time = datetime.utcnow().replace(tzinfo=timezone.utc)
+        # utc +8
+        chn_time = utc_time.astimezone(timezone(timedelta(hours=8)))
+        current_user.last_seen = chn_time
+        db.session.commit()
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -65,7 +88,7 @@ def logout():
     return redirect(url_for('show_entries'))
 
 
-@app.route('/index')
+# @app.route('/index')
 # def show_entries():
 #     # get_recent_posts()
 #     cur = g

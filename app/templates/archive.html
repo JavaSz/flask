@@ -9,8 +9,10 @@
                 <span class="post-category">
                     <a href="/category/1/">{{ item[6] }}</a></span>
                 <span class="post-date"><a href="/archive/{{ item[2] }}"><time class="entry-date">{{ item[2] }}</time></a></span>
-                <span class="post-author"><a href="#">{{ item[3] }}</a></span>
-                <span class="views-count"><a href="#">10054 阅读</a></span>
+                <span class="post-author">
+                    <a href="{{ url_for('user', userid=item[3])}}">作者页面</a>
+                </span>
+{#                <span class="views-count"><a href="#">10054 阅读</a></span>#}
             </div>
         </header>
         <div class="entry-content clearfix">

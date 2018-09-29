@@ -11,6 +11,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
+from hashlib import md5
 
 # connect = create_engine("mysql+pymysql://root:0304@localhost:3306/flaskr",
 #                         encoding="utf-8",
@@ -25,6 +26,8 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
+    about_me = db.Column(db.String(255))
+    last_seen = db.Column(db.DateTime, default=datetime.now)
     # 我不需要为timestamp字段设置一个值，因为这个字段有一个默认值，你可以在模型定义中看到。
     # 那么user_id字段呢？ 回想一下，我在User类中创建的db.relationship为用户添加了posts属性，
     # 并为用户动态添加了author属性。 我使用author虚拟字段来调用其作者，
@@ -39,6 +42,11 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+    def avatar(self, size):
+        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
+        return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(
+            digest, size)
 
 
 class Post(db.Model):
