@@ -12,11 +12,61 @@
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>
-{% extends "base.html" %}
+{#{% extends "base.html" %}#}
 
-{% block content %}
-    <h1>Register</h1>
-    <form action="" method="post">
+{#{% block content %}#}
+{#    <h1>Register</h1>#}
+{#    <form action="" method="post">#}
+{#        {{ form.hidden_tag() }}#}
+{#        <p>#}
+{#            {{ form.username.label }}<br>#}
+{#            {{ form.username(size=32) }}<br>#}
+{#            {% for error in form.username.errors %}#}
+{#            <span style="color: red;">[{{ error }}]</span>#}
+{#            {% endfor %}#}
+{#        </p>#}
+{#        <p>#}
+{#            {{ form.email.label }}<br>#}
+{#            {{ form.email(size=64) }}<br>#}
+{#            {% for error in form.email.errors %}#}
+{#            <span style="color: red;">[{{ error }}]</span>#}
+{#            {% endfor %}#}
+{#        </p>#}
+{#        <p>#}
+{#            {{ form.password.label }}<br>#}
+{#            {{ form.password(size=32) }}<br>#}
+{#            {% for error in form.password.errors %}#}
+{#            <span style="color: red;">[{{ error }}]</span>#}
+{#            {% endfor %}#}
+{#        </p>#}
+{#        <p>#}
+{#            {{ form.password2.label }}<br>#}
+{#            {{ form.password2(size=32) }}<br>#}
+{#            {% for error in form.password2.errors %}#}
+{#            <span style="color: red;">[{{ error }}]</span>#}
+{#            {% endfor %}#}
+{#        </p>#}
+{#        <p>{{ form.submit() }}</p>#}
+{#    </form>#}
+{#{% endblock %}#}
+    <div class="login-main">
+  <div class="login-form">
+    <h1>User Register</h1>
+          <div class="login-head">
+            <img src="static/images/user.jpg" alt=""/>
+          </div>
+    {% if error %}<p class="error"><strong>Error:</strong> {{ error }}{% endif %}
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul style="text-align: center; list-style: none">
+
+            {% for message in messages %}
+            <li><p style="color:red">{{ message }}</p></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
             {{ form.username.label }}<br>
@@ -41,12 +91,15 @@
         </p>
         <p>
             {{ form.password2.label }}<br>
-            {{ form.password2(size=32) }}<br>
+            {{ form.password2(size=64) }}<br>
             {% for error in form.password2.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>{{ form.submit() }}</p>
+
     </form>
-{% endblock %}
+  <p style="text-align: center;padding-bottom: 50px">Already have an account?<a href="{{ url_for('login') }}">Log in</a></p>
+  </div>
+</div>
 </body>

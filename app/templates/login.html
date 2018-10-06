@@ -43,14 +43,6 @@
             <img src="static/images/user.jpg" alt=""/>
           </div>
     {% if error %}<p class="error"><strong>Error:</strong> {{ error }}{% endif %}
-{#    <form action="{{ url_for('login') }}" method=post>#}
-{##}
-{#        <!-- onfocus 后执行的js语句 -->#}
-{#        <input type=text name=username value="username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'username';}">#}
-{#        <input type=password name=password value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}">#}
-{#        <input type=submit value=Login>#}
-{#    </form>#}
-{#    <h1>Sign In</h1>#}
         {% with messages = get_flashed_messages() %}
         {% if messages %}
         <ul style="text-align: center; list-style: none">
@@ -81,6 +73,6 @@
         <p>{{ form.submit() }}</p>
 
     </form>
-  <p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
+  <p style="text-align: center;padding-bottom: 50px">New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
   </div>
 </div>

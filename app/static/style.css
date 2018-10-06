@@ -2,48 +2,112 @@
     margin: 0;
     padding: 0;
 }
-/*register */
-.register-button {
-    cursor: pointer;
-    border-radius: 3px;
-    padding: 8px 0;
-    /*所有 4 个外边距都是 16px*/
-    margin: 16px;
-    box-sizing: border-box;
-    border: 1px solid #d6d9dc;
-    text-align: center;
-    background: #FFF;
-    color: #535a60;
-}
-/*twiter login*/
-.register-button.twiter-login {
-    color: #FFF;
-    background-color: #1da1f2;
-    border-color: transparent;
-}
-/*Or Register*/
-.or-container {
-    text-align: center;
-    margin: 0;
-    margin-bottom: 10px;
-    clear: both;
-    color: #6a737c;
-    font-variant: small-caps;
-}
- .or-hr {
-    margin-bottom: 0;
-    position: relative;
-    top: 19px;
-    height: 0;
-    border: 0;
-    border-top: 1px solid #FFF;
-}
-#or {
-    display: inline-block;
-    position: relative;
-    padding: 10px;
+/*register button*/
+.button {
+  color: #666;
+  background-color: #EEE;
+  border-color: #EEE;
+  font-weight: 300;
+  font-size: 16px;
+  font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  text-decoration: none;
+  text-align: center;
+  line-height: 40px;
+  height: 40px;
+  padding: 0 40px;
+  margin: 0;
+  display: inline-block;
+  appearance: none;
+  cursor: pointer;
+  border: none;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-transition-property: all;
+          transition-property: all;
+  -webkit-transition-duration: .3s;
+          transition-duration: .3s;
+  /*
+  * Disabled State
+  *
+  * The disabled state uses the class .disabled, is-disabled,
+  * and the form attribute disabled="disabled".
+  * The use of !important is only added because this is a state
+  * that must be applied to all buttons when in a disabled state.
+  */ }
+  .button:visited {
+    color: #666; }
+  .button:hover, .button:focus {
+    background-color: #f6f6f6;
+    text-decoration: none;
+    outline: none; }
+  .button:active, .button.active, .button.is-active {
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+    text-decoration: none;
     background-color: #eeeeee;
-}
+    border-color: #cfcfcf;
+    color: #d4d4d4;
+    -webkit-transition-duration: 0s;
+            transition-duration: 0s;
+    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2); }
+  .button.disabled, .button.is-disabled, .button:disabled {
+    top: 0 !important;
+    background: #EEE !important;
+    border: 1px solid #DDD !important;
+    text-shadow: 0 1px 1px white !important;
+    color: #CCC !important;
+    cursor: default !important;
+    appearance: none !important;
+    -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+    opacity: .8 !important; }
+
+/*
+* Glowing Buttons Base Styes
+*
+* A pulse like glow that appears
+* rythmically around the edges of
+* a button.
+*/
+.button-glow {
+  -webkit-animation-duration: 3s;
+          animation-duration: 3s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-name: glowing;
+          animation-name: glowing; }
+  .button-glow:active, .button-glow.active, .button-glow.is-active {
+    -webkit-animation-name: none;
+            animation-name: none; }
+
+/*
+* Glowing Button Colors
+*
+* Create colors for glowing buttons
+*/
+.button-glow.button-primary {
+  -webkit-animation-name: glowing-primary;
+          animation-name: glowing-primary; }
+.button-glow.button-plain {
+  -webkit-animation-name: glowing-plain;
+          animation-name: glowing-plain; }
+.button-glow.button-inverse {
+  -webkit-animation-name: glowing-inverse;
+          animation-name: glowing-inverse; }
+.button-glow.button-action {
+  -webkit-animation-name: glowing-action;
+          animation-name: glowing-action; }
+.button-glow.button-highlight {
+  -webkit-animation-name: glowing-highlight;
+          animation-name: glowing-highlight; }
+.button-glow.button-caution {
+  -webkit-animation-name: glowing-caution;
+          animation-name: glowing-caution; }
+.button-glow.button-royal {
+  -webkit-animation-name: glowing-royal;
+          animation-name: glowing-royal; }
+
 /*全文检索*/
 #header-search-box {
     position: absolute;
