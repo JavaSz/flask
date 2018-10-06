@@ -170,7 +170,7 @@ def show_about():
 def add_entry():
     if current_user.is_anonymous:
         abort(401)
-    g.execute('insert into entries (title, description, content, date, author, tags) values (%s, %s, %s, %s, %s, %s)', [
+    g.execute('insert into post (title, description, body, timestamp, user_id, tags) values (%s, %s, %s, %s, %s, %s)', [
         request.form['title'],
         request.form['description'],
         request.form['content'],
@@ -178,7 +178,7 @@ def add_entry():
         request.form['author'],
         request.form['tags']
                                                                                                          ])
-    db.commit()
+    db.session.commit()
     flash('New entry was successfully posted')
     return redirect(url_for('show_entries'))
 
