@@ -810,3 +810,13 @@ h1.wp-heading-inline {
     margin-bottom: 40px;
     border-bottom: 1px solid #e7e7e7;
 }
+
+
+/*评论政策*/
+.policys-container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}

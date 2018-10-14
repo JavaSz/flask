@@ -88,6 +88,11 @@ def logout():
     return redirect(url_for('show_entries'))
 
 
+@app.route('/policy')
+def show_policy():
+    return render_template('comment-policy.html')
+
+
 # @app.route('/index')
 # def show_entries():
 #     # get_recent_posts()
