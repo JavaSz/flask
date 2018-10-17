@@ -110,7 +110,7 @@ def register():
         return redirect(url_for('show_entries'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
+        user = User(username=form.username.data, email=form.email.data, about_me=form.about_me.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()

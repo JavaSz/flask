@@ -20,6 +20,7 @@
     <script src="/static/ckeditor/ckeditor.js"></script>
     <script src="//code.jquery.com/jquery-1.9.1.js"></script>
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="http://momentjs.com/downloads/moment.js"></script>
 </head>
 <body>
     <div class="container">
@@ -42,8 +43,8 @@
                             <ul class="nav navbar-nav navbar-right">
                             <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}"data-hover="首页">首页</a></li>
                             <li class="cl-effect-11"><a href="{{ url_for('show_friends') }}"data-hover="友链">友链</a></li>
-                            <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}"data-hover="关于">关于</a></li>
-                            <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}"data-hover="联系">联系</a></li>
+                            <li class="cl-effect-11"><a href="{{ url_for('show_about') }}"data-hover="关于">关于</a></li>
+{#                            <li class="cl-effect-11"><a href="{{ url_for('show_entries') }}"data-hover="联系">联系</a></li>#}
                                   <!--判断是否登录-->
                               {% if current_user.is_anonymous %}
                                 <li class="cl-effect-11"><a href="{{ url_for('login') }}"data-hover="登录">登录</a></li>
@@ -197,5 +198,10 @@ function daysMonth(month, year) {
 refreshDate();
 
 </script>
+<script>
+{#    {{ super() }}#}
+    {{ moment.include_moment() }}
+</script>
+
 </body>
 </html>
