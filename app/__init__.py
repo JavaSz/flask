@@ -22,5 +22,3 @@ moment = Moment(app)
 from app import routes, models
 
 
-
-

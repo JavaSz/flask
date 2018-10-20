@@ -7,7 +7,6 @@
 from flask_login import UserMixin
 from app import db
 from app import login
-from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash

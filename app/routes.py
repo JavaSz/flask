@@ -4,7 +4,7 @@
 # @FileName: routes.py
 # @Software: PyCharm
 # @Blog    ：https://codedraw.cn
-from flask import render_template, flash, redirect, url_for, session, abort
+from flask import render_template, flash, redirect, url_for, session, abort, current_app, g
 from app import app
 from app import db
 from app.forms import LoginForm
@@ -16,6 +16,9 @@ from app.forms import RegistrationForm
 import pymysql
 import numpy as np
 from datetime import datetime, timezone, timedelta
+from app.forms import SearchForm
+import requests
+
 
 # connect database
 data = pymysql.connect(
@@ -28,9 +31,17 @@ data = pymysql.connect(
 g = data.cursor()
 
 
+@app.errorhandler(404)
+def page_not_found():
+    return render_template('404.html'), 404
+
+
 @app.route('/')
 def show_entries():
     # get_recent_posts()
+    url = "https://v1.hitokoto.cn/"
+    r = requests.get(url)
+    hitokoto_to_json = r.json()
     cur = g
     g.execute('select id, title, description, timestamp, user_id, tags from post order by id desc')
     entries = [dict(id=row[0], title=row[1], description=row[2], date=row[3], author=row[4], tags=row[5]) for row in cur.fetchall()]
@@ -38,7 +49,7 @@ def show_entries():
     # g.execute('select id, title, description, timestamp, user_id, tags from post order by id desc')
     g.execute('select id, title, description, timestamp, user_id, tags from post order by timestamp desc LIMIT 0,2')
     posts = [dict(id=row[0], title=row[1], description=row[2], date=row[3], author=row[4]) for row in cur.fetchall()]
-    return render_template('index.html', entries=entries, posts=posts)
+    return render_template('index.html', entries=entries, posts=posts, hitokoto=hitokoto_to_json)
 
 
 @app.route('/user/<userid>')
@@ -91,17 +102,6 @@ def logout():
 @app.route('/policy')
 def show_policy():
     return render_template('comment-policy.html')
-
-
-# @app.route('/index')
-# def show_entries():
-#     # get_recent_posts()
-#     cur = g
-#     g.execute('select id, title, description, timestamp, user_id, tags from post order by id desc')
-#     entries = [dict(id=row[0], title=row[1], description=row[2], date=row[3], author=row[4], tags=row[5]) for row in cur.fetchall()]
-#     g.execute('select id, title, description, timestamp, user_id, tags from post order by timestamp desc LIMIT 0,2')
-#     posts = [dict(id=row[0], title=row[1], description=row[2], date=row[3], author=row[4]) for row in cur.fetchall()]
-#     return render_template('index.html', entries=entries, posts=posts)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -202,4 +202,11 @@ def show_edit():
             render_template('editor.html')
     return render_template('login.html', error=error)
 
+
+@app.route('/hitokoto/api')
+def get_hitokoto():
+    url = "https://v1.hitokoto.cn/"
+    r = requests.get(url)
+    hitokoto_to_json = r.json()
+    return render_template('test.html', hitokoto=hitokoto_to_json)
 

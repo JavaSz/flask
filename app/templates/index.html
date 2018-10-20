@@ -30,7 +30,17 @@
             <!-- 侧边栏 -->
             <aside class="col-md-4">
                 <div class="widget widget-author">
-                    <h1>Hi, {{ current_user.username }}!</h1>
+{#                    <h1>Hi, {{ current_user.username }}!</h1>#}
+                    <div class="message-box">
+
+                        <span>『&nbsp{{ hitokoto.hitokoto }}&nbsp』</span>
+                        <p>-「{{ hitokoto.from }}」</p>
+
+                        <div class="triangle-border tb-border"></div>
+
+                        <div class="triangle-border tb-background"></div>
+
+                    </div>
                 </div>
               <!-- 最新的两篇文章 -->
               <div class="widget widget-recent-posts">

@@ -821,3 +821,63 @@ h1.wp-heading-inline {
     margin-right: auto;
     margin-left: auto;
 }
+
+
+/*hitokoto对话框*/
+.message-box {
+
+   position:relative;
+
+   width:260px;
+
+   height:auto;
+
+   line-height:25px;
+
+   background:#E9FBE4;
+
+   box-shadow:1px 2px 3px #E9FBE4;
+
+   border:0px solid #C9E9C0;
+
+   border-radius:5px;
+
+   text-align:center;
+
+   /*color:#0C7823;*/
+
+}
+
+.triangle-border {
+
+   position:absolute;
+
+   left:30px;
+
+   overflow:hidden;
+
+   width:0;
+
+   height:0;
+
+   border-width:10px;
+
+   border-style:solid dashed dashed dashed;
+
+}
+
+.tb-border {
+
+   bottom:-20px;
+
+   border-color:#C9E9C0 transparent transparent transparent;
+
+}
+
+.tb-background {
+
+   bottom:-19px;
+
+   border-color:#E9FBE4 transparent transparent transparent;
+
+}
