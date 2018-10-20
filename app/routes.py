@@ -16,7 +16,6 @@ from app.forms import RegistrationForm
 import pymysql
 import numpy as np
 from datetime import datetime, timezone, timedelta
-from app.forms import SearchForm
 import requests
 
 
