@@ -45,9 +45,8 @@ def show_entries():
     hitokoto_to_json = r.json()
     cur = g
     g.execute('select id, title, description, timestamp, user_id, tags from post order by id desc')
-    entrie = [dict(id=row[0], title=row[1], description=row[2], date=row[3], author=row[4], tags=row[5]) for row in cur.fetchall()]
+    entries = [dict(id=row[0], title=row[1], description=row[2], date=row[3], author=row[4], tags=row[5]) for row in cur.fetchall()]
     # 获取作者名称
-    entries = entrie[0:2]
     # g.execute('select id, title, description, timestamp, user_id, tags from post order by id desc')
     g.execute('select id, title, description, timestamp, user_id, tags from post order by timestamp desc LIMIT 0,2')
     posts = [dict(id=row[0], title=row[1], description=row[2], date=row[3], author=row[4]) for row in cur.fetchall()]

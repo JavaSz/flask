@@ -9,14 +9,42 @@
                     <header class="entry-header">
                         {% for entry in entries %}
                         <!-- 绑定文章详情 -->
-                          <a href="{{ url_for('get_post', post_id=entry.id) }}">
-                            <h1 class="entry-title">{{ entry.title}}</h1>
-                          </a>
-                          <p class="entry-date">Published:&nbsp<!--<a href="/archives/{{ entry.date}}">--><i class="fa fa-clock"></i><b>{{ entry.date }}</b>
+                            <div class="post post-list">
+                                <div class="feature">
+                                    <a href="{{ url_for('get_post', post_id=entry.id) }}">
+                                        <div class="overlay"><i class="fa fa-file-text" aria-hidden="true"></i></div>
+                                    <script type="text/javascript">
+                                      function randomPic() {
+                                        var pic = [];
+                                        pic[1] = "/static/images/random/d-1.jpg"
+                                        pic[2] = "/static/images/random/d-2.jpg"
+                                        pic[3] = "/static/images/random/d-3.jpg"
+                                        pic[4] = "/static/images/random/d-4.jpg"
+                                        pic[5] = "/static/images/random/d-5.jpg"
+                                        pic[6] = "/static/images/random/d-6.jpg"
+                                        pic[7] = "/static/images/random/d-7.jpg"
+                                        pic[8] = "/static/images/random/d-8.jpg"
+                                        pic[9] = "/static/images/random/d-9.jpg"
+                                        pic[10] = "/static/images/random/d-10.jpg"
+                                        var randomBgIndex = Math.round( Math.random() * 11 );
+                                        document.write("<img src=" + pic[randomBgIndex] + ">")
+                                    }
+                                    randomPic();
+                                    </script>
+                                    </a>
+                                </div>
+
+                                <h1 class="entry-title"><a href="{{ url_for('get_post', post_id=entry.id) }}">{{ entry.title}}</a></h1>
+
+                                <p class="p-time"><i class="fa fa-calendar" aria-hidden="true"></i><b>{{ entry.date }}</b>
 {#                            Author:&nbsp<b>{{ entry.author }}</b>#}
-                          </p>
+                                </p>
+                                <p>{{ entry.description|safe }}</p>
+                            </div>
+
+
                             <div class="entry-content clearfix">
-                            {{ entry.description|safe }}
+{#                            {{ entry.description|safe }}#}
                               <div class="read-more cl-effect-14">
                                   <a href="{{ url_for('get_post', post_id=entry.id) }}" class="more-link">Read More&nbsp<span class="meta-nav">→</span></a>
                               </div>
