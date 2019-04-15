@@ -30,6 +30,7 @@ data = pymysql.connect(
 g = data.cursor()
 
 
+
 @app.errorhandler(404)
 def page_not_found():
     return render_template('404.html'), 404
@@ -38,13 +39,15 @@ def page_not_found():
 @app.route('/')
 def show_entries():
     # get_recent_posts()
+    page = request.args.get('page', 1, type=int)
     url = "https://v1.hitokoto.cn/"
     r = requests.get(url)
     hitokoto_to_json = r.json()
     cur = g
     g.execute('select id, title, description, timestamp, user_id, tags from post order by id desc')
-    entries = [dict(id=row[0], title=row[1], description=row[2], date=row[3], author=row[4], tags=row[5]) for row in cur.fetchall()]
+    entrie = [dict(id=row[0], title=row[1], description=row[2], date=row[3], author=row[4], tags=row[5]) for row in cur.fetchall()]
     # 获取作者名称
+    entries = entrie[0:2]
     # g.execute('select id, title, description, timestamp, user_id, tags from post order by id desc')
     g.execute('select id, title, description, timestamp, user_id, tags from post order by timestamp desc LIMIT 0,2')
     posts = [dict(id=row[0], title=row[1], description=row[2], date=row[3], author=row[4]) for row in cur.fetchall()]
@@ -166,6 +169,12 @@ def show_friends():
 @app.route('/about')
 def show_about():
     return render_template('about.html')
+
+
+# message board
+@app.route('/saywhat')
+def show_message():
+    return render_template('message.html')
 
 
 # 1. g对象是专门用来保存用户的数据的。

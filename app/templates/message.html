@@ -1,0 +1,35 @@
+{% extends "main.html" %}
+{% block body %}
+    <div class="profile">
+<h1>留言板</h1></div>
+<form action="/post" method="post">
+<p>请留言</p>
+    <table>
+        <tr>
+        <th>名字</th>
+        <td>
+        <input type="text" size="20" name="name">
+        </td>
+        </td>
+        </tr>
+        <tr>
+            <th>留言</th>
+            <td>
+                <textarea rows="5" cols="40" name="comment"></textarea>
+            </td>
+        </tr>
+    </table>
+    <p><button type="submit">提交</button></p>
+    </form>
+<div class="entries-area">
+    <h2>留言记录</h2>
+    <h3>游客 的留言 （2017年11月2日21:45:05）</h3>
+    <p>
+        留言内容<br>
+        留言内容
+
+    </p>
+
+</div>
+
+{% endblock %}

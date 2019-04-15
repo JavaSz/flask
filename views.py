@@ -7,13 +7,13 @@
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
 import numpy as np
 import pymysql
-
+from app.config import Config
 # 创建应用
 # ... add more variables here as needed
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hard to guess'
 app.config['USERNAME'] = 'admin'
-app.config['PASSWORD'] = '12345'
+app.config['PASSWORD'] = '0304'
 app.config.from_object(__name__)
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
@@ -114,9 +114,9 @@ def add_entry():
 def login():
     error = None
     if request.method == 'POST':
-        if request.form['username'] != app.config['USERNAME']:
+        if request.form['username'] != app.config['ADMIN_USERNAME']:
             error = 'Invalid username'
-        elif request.form['password'] != app.config['PASSWORD']:
+        elif request.form['password'] != app.config['ADMIN_PASSWORD']:
             error = 'Invalid password'
         else:
             session['logged_in'] = True
