@@ -984,3 +984,128 @@ h1.entry-title {
 #myBtn:hover {
   background-color: #555;
 }
+
+
+
+
+/*三栏*/
+
+
+
+
+
+/*顶部*/
+.app-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #3a3f51;
+}
+
+.navbar {
+    margin: 0;
+    border-width: 0;
+    border-radius: 0;
+}
+
+.navbar-header {
+    height: 50px;
+}
+
+.bg-dark {
+    color: #a6a8b1;
+    background-color: #3a3f51;
+}
+
+/*站点名强制为白色显示*/
+.text-lt{
+    color: #eaebed!important;
+}
+
+.pull-right {
+    float: right!important;
+}
+
+/*站点名距离icon左边距*/
+.m-l-xs {
+    margin-left: 5px;
+}
+
+
+/*左侧边栏*/
+.aside-wrap {
+    position: fixed;
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    width: 200px;
+    overflow: hidden;
+    background-color: #edf1f2;
+}
+
+.aside-wrap .navi-wrap {
+    position: relative;
+    width: 399px;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+.aside-wrap .navi-wrap>* {
+    width: 220px;
+}
+
+
+.wrapper {
+    padding: 15px;
+}
+
+.dropdown, .dropup {
+    position: relative;
+}
+
+
+.thumb-lg {
+    display: inline-block;
+    width: 96px;
+}
+
+.m-t-sm {
+    margin-top: 10px;
+}
+
+.avatar-left {
+    position: relative;
+    display: block;
+    white-space: nowrap;
+}
+
+.avatar-radius img{
+    border-radius:100%;
+}
+
+.nav-left {
+     padding-left: 0; 
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.navi ul.nav-left li a {
+    position: relative;
+    display: block;
+    padding: 10px 20px;
+    font-weight: 400;
+    text-transform: none;
+    -webkit-transition: background-color .2s ease-in-out 0s;
+    transition: background-color .2s ease-in-out 0s;
+}
+
+#menu-checkbox,
+#menu-toggle {
+  display: none;
+}
+
+
+.show-menu {display:block;}

@@ -10,6 +10,7 @@
     <!-- css -->
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" media="(max-width: 768px)" href="{{ url_for('static', filename='mobile.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.min.css') }}">
     <!-- jquery -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
@@ -69,7 +70,6 @@
 </div>               
 </header>
      {% block body %}{% endblock %}
-    
     <div class="footer">
     <!-- 版权信息 -->
     <p>© Copyright 2018&nbsp<i class="fa fa-heart" aria-hidden="true"></i>&nbsp SyNr</p>

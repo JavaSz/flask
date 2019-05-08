@@ -3,6 +3,65 @@
   <div class="content-body">
     <div class="container">
         <div class="row">
+          <!-- 侧边栏 -->
+           <div class="col-md-1">
+                  <div class="aside-wrap" layout="column">
+        <div class="navi-wrap scroll-y" flex="">
+          <!-- user -->
+          <div class="clearfix hidden-xs text-center hide show" id="aside-user">
+            <div class="dropdown wrapper">
+                <div ui-nav="" class="avatar-radius">
+                          <a href="https://moeclub.org/about">
+                            <span class="thumb-lg w-auto-folded avatar-left m-t-sm">
+                  <img src="https://www.codedraw.cn/wp-content/uploads/2017/12/1.jpg" class="img-full">
+                </span>
+              </a>
+                </div>
+            </div>
+              <div class="line dk hidden-folded"></div>
+          </div>
+          
+          <!-- nav -->
+          <nav ui-nav="" class="navi" >
+            <ul class="nav-left" id="nav-menu">
+             <!--index-->
+                                          <!--主页-->
+              <li>
+                <a href="/" class="auto">
+                  <i class="fa fa-home" aria-hidden="true"></i>
+                  <span>首页</span>
+                </a>
+              </li>
+                               
+                                <li><a href="{{ url_for('show_about') }}"><i class="fa fa-info" aria-hidden="true"></i>
+                                  <span>关于我</span></a>
+                                </li> 
+                                <li><a href="{{ url_for('show_friends') }}"><i class="fa fa-link" aria-hidden="true"></i>
+                                  <span>友情链接</span></a>
+                                </li>
+
+
+                              {% if current_user.is_anonymous %}
+                              <li><a href="{{ url_for('login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i>
+                                <span>登录</span></a>
+                                </li>
+                               {% else %}
+                                <li><a href="{{ url_for('logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>
+                                <span>登出</span></a>
+                                </li>
+                                <li><a href="{{ url_for('admin') }}"><i class="fa fa-user-secret" aria-hidden="true"></i>
+                                <span>Management</span></a>
+                                </li>
+                              {% endif %}
+                            <!-- /主页 -->
+                                                          <li class="line dk"></li>
+          </ul>
+              <!--Components-->
+    </div>
+
+      </div>
+
+           </div>
           <!-- 文章 -->
             <main class="col-md-8">
                 <article class="post">
@@ -56,7 +115,7 @@
                 </article>
             </main>
             <!-- 侧边栏 -->
-            <aside class="col-md-4">
+            <aside class="col-md-2">
                 <div class="widget widget-author">
 {#                    <h1>Hi, {{ current_user.username }}!</h1>#}
                     <div class="message-box">

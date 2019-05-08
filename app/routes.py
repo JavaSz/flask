@@ -36,6 +36,15 @@ def page_not_found():
     return render_template('404.html'), 404
 
 
+@app.errorhandler(403)
+def page_forbidden():
+    return render_template('403.html'), 403
+
+@app.errorhandler(500)
+def internal_server_error():
+    return render_template('500.html'), 500
+
+
 @app.route('/')
 def show_entries():
     # get_recent_posts()
