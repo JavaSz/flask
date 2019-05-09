@@ -1,0 +1,48 @@
+{% extends "main.html" %}
+
+{% block body %}
+    <form action="" method="post" class="bootstrap-frm">
+
+
+        <h1>Edit Profile
+            <span>Please fill all the texts in the fields.</span>
+        </h1>
+        {{ form.hidden_tag() }}
+        <!-- 状态 -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul style="text-align: center; list-style: none">
+
+
+            <li><p style="color:red">{{ messages }}</p></li>
+
+        </ul>
+        {% endif %}
+        {% endwith %}     
+      <!--  error        -->
+        {% for error in form.username.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            
+        {% endfor %}
+<!-- error
+ -->
+        {% for error in form.about_me.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+        <label>
+
+            {{ form.username.label }}
+            {{ form.username(size=32) }}
+
+
+        </label>
+        <label>
+            {{ form.about_me.label }}
+             {{ form.about_me(cols=50, rows=4) }}
+
+        </label>
+        <label>
+            {{ form.submit() }}
+        </label>
+    </form>
+{% endblock %}

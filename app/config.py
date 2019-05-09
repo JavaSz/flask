@@ -9,8 +9,6 @@ import pymysql
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
-class Config(object):
-    # ...
-    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:0304@localhost/blog"
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
+SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:0304@localhost/blog"
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'

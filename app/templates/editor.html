@@ -1,8 +1,10 @@
 {% extends "main.html" %}
 {% block body %}
-<div class="content-write">
+<div class="content-write">        
+    <a href="{{ url_for('edit_profile') }}">编辑您的个人档案</a>
     <form action="{{ url_for('add_entry') }}" method=post>
         <h1 class="wp-heading-inline">撰写新文章</h1>
+
         <hr class="wp-header-end">
                 <label>在此输入标题<input size="30" name="title" type="text"></label>
             <div class="description-sidebar">

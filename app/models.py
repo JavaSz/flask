@@ -4,6 +4,7 @@
 # @FileName: models.py
 # @Software: PyCharm
 # @Blog    ：https://codedraw.cn
+from flask import url_for
 from flask_login import UserMixin
 from app import db
 from app import login
@@ -46,6 +47,28 @@ class User(UserMixin, db.Model):
         digest = md5(self.email.lower().encode('utf-8')).hexdigest()
         return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(
             digest, size)
+
+    def to_dict(self, include_email=False):
+        data = {
+            'id': self.id,
+            'username': self.username,
+            # 'last_seen': self.last_seen.isoformat() + 'Z',
+            'about_me': self.about_me,
+            '_links': {
+                'self': url_for('get_user', id=self.id),
+                'avatar': self.avatar(128)
+            }
+        }
+        if include_email:
+            data['email'] = self.email
+        return data
+
+    def from_dict(self, data, new_user=False):
+        for field in ['username', 'email', 'about_me']:
+            if field in data:
+                setattr(self, field, data[field])
+        if new_user and 'password' in data:
+            self.set_password(data['password'])
 
 
 class Post(db.Model):

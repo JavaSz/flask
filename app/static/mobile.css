@@ -46,3 +46,15 @@
 #menu-checkbox:checked ~ .navi{
   display: block;
 }
+
+.feature{
+  display: none;
+}
+
+.p-time {
+    position: absolute;
+    right: 0;
+    top: 16px;
+    display: block;
+    margin: 0 auto;
+}

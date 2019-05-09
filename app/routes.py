@@ -4,7 +4,9 @@
 # @FileName: routes.py
 # @Software: PyCharm
 # @Blog    ：https://codedraw.cn
-from flask import render_template, flash, redirect, url_for, session, abort, current_app, g
+from flask import render_template, flash, redirect, url_for, session, abort, current_app, g, jsonify
+from werkzeug.exceptions import BadRequest
+
 from app import app
 from app import db
 from app.forms import LoginForm
@@ -13,6 +15,7 @@ from app.models import User, Post
 from flask import request
 from werkzeug.urls import url_parse
 from app.forms import RegistrationForm
+from app.forms import EditProfileForm
 import pymysql
 import numpy as np
 from datetime import datetime, timezone, timedelta
@@ -28,6 +31,7 @@ data = pymysql.connect(
     charset='utf8'
 )
 g = data.cursor()
+
 
 
 
@@ -225,4 +229,32 @@ def get_hitokoto():
     r = requests.get(url)
     hitokoto_to_json = r.json()
     return render_template('test.html', hitokoto=hitokoto_to_json)
+
+
+@app.route('/edit_profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    form = EditProfileForm(current_user.username)
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.about_me = form.about_me.data
+        db.session.commit()
+        flash('Your changes have been saved.')
+        return redirect(url_for('edit_profile'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.about_me.data = current_user.about_me
+    return render_template('edit_profile.html', title='Edit Profile',
+                           form=form)
+
+
+# restful api
+
+
+
+@app.route('/api/users/<int:id>', methods=['GET'])
+def get_user(id):
+    return jsonify(User.query.get_or_404(id).to_dict())
+
+
 
